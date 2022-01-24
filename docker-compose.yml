@@ -5,23 +5,16 @@ networks:
 
 
 services:
-    nginx:
-        image: nginx:stable-alpine
-        container_name: nginx_laravel
-        ports:
-            - "7000:89"
+    webserver:
+        image: nginx:alpine
         volumes:
-            - ./src:/var/www/html
+            - ./:/var/www
                 ## copy nginx configuration for our application ##
             - ./docker/nginx/conf.d/:/etc/nginx/conf.d/
-        depends_on:
-            - php
-            - mysql
-        networks:
-            laravel
 
+    
     mysql:
-        image: mysql:8.0
+        image: mysql:5.7.29
         container_name: mysql_laravel
         restart: unless-stopped
         ports: 
