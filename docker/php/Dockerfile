@@ -1,4 +1,4 @@
-FROM php:7.4-fpm-alpine
+FROM php:7.4-fpm
 
 WORKDIR /var/www/html
 
@@ -8,3 +8,7 @@ RUN chmod uga+x /usr/local/bin/install-php-extensions && sync && \
     install-php-extensions pdo pdo_mysql gd zip exif
 
 RUN docker-php-ext-install mysqli pdo pdo_mysql exif
+
+RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
+
+CMD bash -c "composer install && php-fpm"

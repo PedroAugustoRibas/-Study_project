@@ -37,19 +37,10 @@ services:
             dockerfile: ./docker/php/Dockerfile
         container_name: php_laravel
         volumes: 
-            - ./src:/var/www/html
+            - ./:/var/www
         ports: 
             - "9004:9004"
         networks: 
             - laravel
-    
-    composer:
-        image: composer:latest
-        container_name: composer_laravel
-        volumes: 
-            - ./src:/var/www/html
-        working_dir: /var/www/html
-        depends_on: 
-            - php
-        networks: 
-            - laravel
+        working_dir: /var/www
+
