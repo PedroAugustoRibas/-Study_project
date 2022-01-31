@@ -8,7 +8,9 @@ services:
             - ./:/var/www
                 ## copy nginx configuration for our application ##
             - ./docker/nginx/conf.d/:/etc/nginx/conf.d/
-
+        ports:
+            ## run the webserver on port 8080 ##
+            - '8001:80'
     
     mysql:
         image: mysql:5.7.29
@@ -37,14 +39,12 @@ services:
         container_name: php_laravel
         volumes: 
             - ./:/var/www
-        ports: 
-            - "9004:9004"
         networks: 
             - laravel
         working_dir: /var/www
 networks:
     laravel:
         ipam:
-            driver: bridge
+            driver: default
             config:
                 - subnet: 172.20.0.0/16

@@ -11,4 +11,6 @@ RUN docker-php-ext-install mysqli pdo pdo_mysql exif
 
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
+EXPOSE 9000
+
 CMD bash -c "composer install && php-fpm"
