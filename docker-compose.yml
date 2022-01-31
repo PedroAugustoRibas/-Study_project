@@ -1,8 +1,5 @@
 version: '3'
 
-networks:
-  laravel:
-
 
 services:
     webserver:
@@ -27,7 +24,9 @@ services:
             SERVICE_TAGS: dev
             SERVICE_NAME: mysql
         networks: 
-            - laravel
+            laravel:
+                ipv4_address: 172.20.0.10
+
         volumes: 
             - ./mysql:/var/lib/mysql
 
@@ -43,4 +42,9 @@ services:
         networks: 
             - laravel
         working_dir: /var/www
-
+networks:
+    laravel:
+        ipam:
+            driver: bridge
+            config:
+                - subnet: 172.20.0.0/16
